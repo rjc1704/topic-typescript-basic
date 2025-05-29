@@ -24,4 +24,13 @@
   type BlueOrGreen = "blue" | "green";
   type OnlyBlue = RedOrBlue & BlueOrGreen;
   let blue: OnlyBlue = "blue";
+
+  // enum 타입: 열거형으로, 관련된 상수들을 하나의 네임스페이스로 묶어서 관리
+  enum Direction {
+    Up = "UP",
+    Down = "DOWN",
+    Left = "LEFT",
+    Right = "RIGHT",
+  }
+  let playerDirection: Direction = Direction.Up;
 }

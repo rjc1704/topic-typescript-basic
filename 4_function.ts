@@ -42,3 +42,14 @@ const getTodos = async () => {
   return data;
 };
 getTodos().then((data) => console.log(data));
+
+// never 타입: 함수가 절대 반환하지 않을 때 사용
+function throwError(message: string): never {
+  throw new Error(message);
+}
+
+function infiniteLoop(): never {
+  while (true) {
+    // 무한 루프
+  }
+}
