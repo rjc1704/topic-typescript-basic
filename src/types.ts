@@ -1,3 +1,5 @@
+// TODO-1: User 타입을 interface로 변경하세요
+
 export type User = {
   id: number;
   name: string;
@@ -6,6 +8,7 @@ export type User = {
   isAdmin: boolean;
 };
 
+// TODO-2: DraftPost, PublishedPost, ArchivedPost 타입을 interface로 변경하세요
 type DraftPost = {
   status: "draft";
   title: string;
@@ -31,15 +34,25 @@ type ArchivedPost = {
 };
 export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 
-// TODO-1: 아래 5가지 블로그 액션 함수타입을 정의하세요
-// GetPostsFunc (특정 저자 글 또는 전체 글 가져오기)
-// GetPostByIdFunc (ID로 글 하나 가져오기)
-// AddPostFunc (새 글 추가 -초기 상태는 draft, ID는 자동 생성 가정. 성공시 Post 반환)
-// UpdatePostFunc (글 수정. 성공시 Post 반환, 실패 시 undefined 반환)
-// DeletePostFunc (글 삭제. 성공 여부 반환)
+export type GetPostsFunc = (authorId?: number) => Post[];
+export type GetPostByIdFunc = (id: number) => Post | undefined;
+export type AddPostFunc = (postData: {
+  title: string;
+  content: string;
+  authorId: number;
+  tags: string[];
+}) => Post;
+export type UpdatePostFunc = (
+  id: number,
+  updateData: {
+    title?: string;
+    content?: string;
+    authorId?: number;
+    tags?: string[];
+    publishedDate?: Date;
+  },
+) => Post | undefined;
+export type DeletePostFunc = (id: number) => boolean;
 
-// export type GetPostsFunc =
-// export type GetPostByIdFunc =
-// export type AddPostFunc =
-// export type UpdatePostFunc =
-// export type DeletePostFunc =
+// TODO-3: User 인터페이스를 확장한 Author 인터페이스를 정의하세요
+// 추가되는 속성 bio?, posts
