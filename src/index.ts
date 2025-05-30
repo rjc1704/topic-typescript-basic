@@ -1,3 +1,4 @@
+import { printPostStatus } from "./postUtils";
 import { User, Post } from "./types";
 
 const sampleUser: User = {
@@ -7,28 +8,6 @@ const sampleUser: User = {
   email: "john.doe@example.com",
   isAdmin: true,
 };
-
-// const samplePosts: Post[] = [
-//   {
-//     id: 1,
-//     title: "Hello World",
-//     content: "This is a sample post",
-//     authorId: sampleUser.id,
-//     tags: ["typescript", "javascript"],
-//     status: "published",
-//   },
-//   {
-//     id: 2,
-//     title: "Hello World 2",
-//     content: "This is a sample post 2",
-//     authorId: sampleUser.id,
-//     tags: ["typescript", "javascript"],
-//     status: "published",
-//   },
-// ];
-
-// console.log("sampleUser", sampleUser);
-// console.log("samplePosts", samplePosts);
 
 const updatedSamplePosts: Post[] = [
   {
@@ -52,7 +31,7 @@ const updatedSamplePosts: Post[] = [
     id: 103,
     title: "주간 회의 미팅 요약",
     content: "이번 주 회의에서 다룬 주요 안건 및 결정 사항입니다.",
-    authorId: "adminUser.id",
+    authorId: sampleUser.id,
     tags: ["meeting", "summary"],
     status: "published",
     publishedDate: new Date(),
@@ -64,9 +43,8 @@ const updatedSamplePosts: Post[] = [
     authorId: sampleUser.id,
     tags: ["update", "archive"],
     status: "archived",
-    publishedDate: new Date(),
     archivedDate: new Date(),
   },
 ];
 
-// TODO-3: printPostStatus 함수를 import 해서 updatedSamplePosts의 각 포스트의 상태를 출력하세요
+updatedSamplePosts.forEach(printPostStatus);
