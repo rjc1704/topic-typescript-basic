@@ -1,37 +1,34 @@
-// TODO-1: User 타입을 interface로 변경하세요
-
-export type User = {
+export interface User {
   id: number;
   name: string;
   age: number;
   email?: string;
   isAdmin: boolean;
-};
+}
 
-// TODO-2: DraftPost, PublishedPost, ArchivedPost 타입을 interface로 변경하세요
-type DraftPost = {
+export interface DraftPost {
   status: "draft";
   title: string;
   content: string;
   authorId: number;
   tags: string[];
-};
-type PublishedPost = {
+}
+export interface PublishedPost {
   status: "published";
   title: string;
   content: string;
   authorId: number;
   tags: string[];
   publishedDate: Date;
-};
-type ArchivedPost = {
+}
+export interface ArchivedPost {
   status: "archived";
   title: string;
   content: string;
   authorId: number;
   tags: string[];
   archivedDate: Date;
-};
+}
 export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 
 export type GetPostsFunc = (authorId?: number) => Post[];
@@ -54,5 +51,10 @@ export type UpdatePostFunc = (
 ) => Post | undefined;
 export type DeletePostFunc = (id: number) => boolean;
 
-// TODO-3: User 인터페이스를 확장한 Author 인터페이스를 정의하세요
-// 추가되는 속성 bio?, posts
+export interface Author extends User {
+  bio?: string;
+  posts: Post[];
+}
+
+// TODO-5: IBlogService 인터페이스를 정의하세요.
+export interface IBlogService {}
