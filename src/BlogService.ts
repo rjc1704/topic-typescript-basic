@@ -1,18 +1,29 @@
-import { DraftPost, Post } from "./types";
+import { DraftPost, IBlogService, Post } from "./types";
 
-export class BlogService {
-  // TODO-1: posts 속성과 nextPostId 속성을 추가하세요.
+export class BlogService implements IBlogService {
+  private posts: Post[] = [];
+  private nextPostId: number = 1;
+
+  // TODO-2: 아래 메서드들의 타입이 실제 API호출처럼 비동기적으로 동작한다고 가정합니다.
+  // 각 메서드들의 리턴타입을 Promise<ApiResponse<T>> 형태로 수정하세요
+  // 메서들의 리턴값은 Promise.resolve() 를 사용하세요.
 
   getAllPosts(): Post[] {
-    // TODO-2: posts 속성을 반환하는 메서드를 작성하세요.
+    return this.posts;
   }
 
   getPostById(id: number): Post | undefined {
-    // TODO-3: id를 기반으로 포스트를 조회하는 메서드를 작성하세요.
+    return this.posts.find((post) => post.id === id);
   }
 
   addPost(postData: Omit<DraftPost, "status">): Post {
-    // TODO-4: 새로운 포스트를 추가하는 메서드를 작성하세요. id 는 nextPostId 속성을 증가시키면서 할당하세요.
+    const post: Post = {
+      ...postData,
+      status: "draft",
+      id: this.nextPostId++,
+    };
+    this.posts.push(post);
+    return post;
   }
 
   updatePost(

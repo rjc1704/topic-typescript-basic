@@ -1,3 +1,4 @@
+import { BlogService } from "./BlogService";
 import { isPublishedPost, printPostStatus } from "./postUtils";
 import { User, Post } from "./types";
 
@@ -54,3 +55,28 @@ updatedSamplePosts.forEach((post) => {
     console.log(`Title: ${post.title}`);
   }
 });
+
+// TODO-3: BlogService 클래스를 사용하여 포스트 관리 기능을 테스트하세요.
+// 모든 메서드들이 비동기적으로 동작한다고 가정합니다.
+// 아래 주석 확인해서 구현하세요
+
+const blogService = new BlogService();
+async function testBlogService() {
+  try {
+    // 모든 포스트 가져와서 콘솔로그 찍으세요. 로그 예시: "모든 포스트 조회 결과: {success: true, data: [...]}"
+    // const allPostsResponse =
+
+    // 새 포스트 추가히고 콘솔로그 찍으세요. 로그 예시: "새 포스트 추가 결과: {success: true, data: {...}}"
+    const newPost = {
+      title: "새로운 블로그 포스트",
+      content: "이것은 테스트 포스트입니다.",
+      authorId: 1,
+      tags: ["test", "blog"],
+    };
+    // const addPostResponse =
+  } catch (error) {
+    console.error("에러 발생:", error);
+  }
+}
+
+testBlogService();
