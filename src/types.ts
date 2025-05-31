@@ -69,14 +69,9 @@ export interface IBlogService {
 
 // TODO-1:src/types.ts에 제네릭 인터페이스 ApiResponse<T>
 // 속성:
-//   success:
-//   boolean,
+//   success: boolean,
 //   data: T,
 //   error?: string
 //   비동기 API 호출 결과를 객체형태의 표준 응답 형태로 사용하기 위해 정의
 
-export interface ApiResponse<T> {
-  success: boolean;
-  data: T;
-  error?: string;
-}
+export interface ApiResponse<T> {}
