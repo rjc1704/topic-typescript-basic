@@ -56,7 +56,7 @@ updatedSamplePosts.forEach((post) => {
   }
 });
 
-// TODO-3: BlogService 클래스를 사용하여 포스트 관리 기능을 테스트하세요.
+// TODO-4: BlogService 클래스를 사용하여 포스트 관리 기능을 테스트하세요.
 // 모든 메서드들이 비동기적으로 동작한다고 가정합니다.
 // 아래 주석 확인해서 구현하세요
 

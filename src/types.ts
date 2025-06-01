@@ -56,6 +56,9 @@ export interface Author extends User {
   posts: Post[];
 }
 
+// TODO-2: 아래 인터페이스를 비동기 메서드로 수정하세요.
+// 메서드들의 리턴타입을 Promise<ApiResponse<T>> 형태로 수정하세요
+
 export interface IBlogService {
   getAllPosts: () => Post[];
   getPostById: (id: number) => Post | undefined;
