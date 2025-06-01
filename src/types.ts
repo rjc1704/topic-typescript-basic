@@ -33,12 +33,16 @@ export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 
 export type GetPostsFunc = (authorId?: number) => Post[];
 export type GetPostByIdFunc = (id: number) => Post | undefined;
+
+// TODO-1: 적절한 유틸리티타입을 사용해서 AddPostFunc의 postData 타입을 수정해보세요
 export type AddPostFunc = (postData: {
   title: string;
   content: string;
   authorId: number;
   tags: string[];
 }) => Post;
+
+// TODO-2: 적절한 유틸리티타입을 사용해서 UpdatePostFunc의 updateData 타입을 수정해보세요
 export type UpdatePostFunc = (
   id: number,
   updateData: {
@@ -81,12 +85,18 @@ export type Optional<T> = {
   [K in keyof T]?: T[K];
 };
 
-// TODO-1:조건부 타입을 사용하여 Post 타입에서 특정 상태(status)에 해당하는 추가 데이터 타입만 추출하는 제네릭 타입을 완성하세요
-// 예: ExtractStatusData<Post, 'published'>는 { publishedDate: Date } 가 되어야 함
-// (infer 사용해보세요)
+export type ExtractStatusData<T, Status extends Post["status"]> = T extends {
+  status: Status;
+  publishedDate?: infer P;
+  archivedDate?: infer A;
+}
+  ? Status extends "published"
+    ? { publishedDate: P }
+    : Status extends "archived"
+    ? { archivedDate: A }
+    : never
+  : never;
 
-// export type ExtractStatusData<T, Status extends Post["status"]> =
-
-// export type PublishedPostData = ExtractStatusData<Post, "published">; // { publishedDate: Date }
-// export type ArchivedPostData = ExtractStatusData<Post, "archived">; // { archivedDate: Date }
-// export type DraftPostData = ExtractStatusData<Post, "draft">; // never
+export type PublishedPostData = ExtractStatusData<Post, "published">; // { publishedDate: Date }
+export type ArchivedPostData = ExtractStatusData<Post, "archived">; // { archivedDate: Date }
+export type DraftPostData = ExtractStatusData<Post, "draft">; // never
