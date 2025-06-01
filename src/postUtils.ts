@@ -35,3 +35,5 @@ export function isArchivedPost(
 ): post is Post & { status: "archived" } {
   return post.status === "archived";
 }
+
+// TODO-2: 제네릭 함수 getProperty<T, K extends keyof T>(obj: T, key: K): T[K] 구현하세요

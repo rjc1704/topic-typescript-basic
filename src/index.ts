@@ -56,15 +56,12 @@ updatedSamplePosts.forEach((post) => {
   }
 });
 
-// TODO-3: BlogService 클래스를 사용하여 포스트 관리 기능을 테스트하세요.
-// 모든 메서드들이 비동기적으로 동작한다고 가정합니다.
-// 아래 주석 확인해서 구현하세요
-
 const blogService = new BlogService();
 async function testBlogService() {
   try {
     // 모든 포스트 가져와서 콘솔로그 찍으세요. 로그 예시: "모든 포스트 조회 결과: {success: true, data: [...]}"
-    // const allPostsResponse =
+    let allPostsResponse = await blogService.getAllPosts();
+    console.log("모든 포스트 조회 결과:", allPostsResponse);
 
     // 새 포스트 추가히고 콘솔로그 찍으세요. 로그 예시: "새 포스트 추가 결과: {success: true, data: {...}}"
     const newPost = {
@@ -73,10 +70,23 @@ async function testBlogService() {
       authorId: 1,
       tags: ["test", "blog"],
     };
-    // const addPostResponse =
+    const addPostResponse = await blogService.addPost(newPost);
+    console.log("새 포스트 추가 결과:", addPostResponse);
+
+    allPostsResponse = await blogService.getAllPosts();
+    console.log("모든 포스트 재조회 결과:", allPostsResponse);
   } catch (error) {
     console.error("에러 발생:", error);
   }
 }
 
-testBlogService();
+// testBlogService();
+
+// TODO-3: getProperty 함수를 import 하여 Post 객체와 속성 이름('title', 'status', 등)을 인자로 넘겨 함수가 잘 동작하는지 콘솔로그를 찍어 테스트하세요
+// 테스트
+const post = { id: 1, title: "Test Post", authorId: 101, status: "draft" };
+console.log(); // "Test Post"
+console.log(); // "draft"
+
+// TODO-5: src/types.ts에 정의한 Optional<T> 타입을 import 하여 옵셔널이 동작하는 지 속성을 빼보면서 확인해 보세요
+// const optionalPost: Optional<Post> = { id: 1, title: "Test Post", authorId: 101, status: "draft" };

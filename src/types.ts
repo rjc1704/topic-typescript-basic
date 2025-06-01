@@ -72,3 +72,8 @@ export interface ApiResponse<T> {
   data: T;
   error?: string;
 }
+
+// TODO-1: Post 인터페이스에서 일부 속성(id, title, authorId, status)만 추출하여 PostSummary 타입을 맵드 타입으로 정의하세요.
+
+// TODO-4: 제네릭 맵드 타입 Optional<T> 정의하고 export 하세요
+// { [P in keyof T]?: T[P] }
