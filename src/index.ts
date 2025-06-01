@@ -1,6 +1,6 @@
 import { BlogService } from "./BlogService";
-import { isPublishedPost, printPostStatus } from "./postUtils";
-import { User, Post } from "./types";
+import { getProperty, isPublishedPost, printPostStatus } from "./postUtils";
+import { User, Post, Optional } from "./types";
 
 const sampleUser: User = {
   id: 1,
@@ -82,11 +82,13 @@ async function testBlogService() {
 
 // testBlogService();
 
-// TODO-3: getProperty 함수를 import 하여 Post 객체와 속성 이름('title', 'status', 등)을 인자로 넘겨 함수가 잘 동작하는지 콘솔로그를 찍어 테스트하세요
-// 테스트
 const post = { id: 1, title: "Test Post", authorId: 101, status: "draft" };
-console.log(); // "Test Post"
-console.log(); // "draft"
+console.log(getProperty(post, "title")); // "Test Post"
+console.log(getProperty(post, "status")); // "draft"
 
-// TODO-5: src/types.ts에 정의한 Optional<T> 타입을 import 하여 옵셔널이 동작하는 지 속성을 빼보면서 확인해 보세요
-// const optionalPost: Optional<Post> = { id: 1, title: "Test Post", authorId: 101, status: "draft" };
+const optionalPost: Optional<Post> = {
+  id: 1,
+  title: "Test Post",
+  authorId: 101,
+  status: "draft",
+};

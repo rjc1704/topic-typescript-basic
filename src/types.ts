@@ -73,7 +73,20 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
-// TODO-1: Post 인터페이스에서 일부 속성(id, title, authorId, status)만 추출하여 PostSummary 타입을 맵드 타입으로 정의하세요.
+export type PostSummary = {
+  [K in "id" | "title" | "authorId" | "status"]: Post[K];
+};
 
-// TODO-4: 제네릭 맵드 타입 Optional<T> 정의하고 export 하세요
-// { [P in keyof T]?: T[P] }
+export type Optional<T> = {
+  [K in keyof T]?: T[K];
+};
+
+// TODO-1:조건부 타입을 사용하여 Post 타입에서 특정 상태(status)에 해당하는 추가 데이터 타입만 추출하는 제네릭 타입을 완성하세요
+// 예: ExtractStatusData<Post, 'published'>는 { publishedDate: Date } 가 되어야 함
+// (infer 사용해보세요)
+
+// export type ExtractStatusData<T, Status extends Post["status"]> =
+
+// export type PublishedPostData = ExtractStatusData<Post, "published">; // { publishedDate: Date }
+// export type ArchivedPostData = ExtractStatusData<Post, "archived">; // { archivedDate: Date }
+// export type DraftPostData = ExtractStatusData<Post, "draft">; // never
