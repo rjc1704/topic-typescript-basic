@@ -19,4 +19,5 @@
   printUserAge({ name: "abc", age: null }); // age null
   printUserAge({ name: "abc", age: 30 }); // age 30
   printUserAge({ name: "abc", age: 0 }); // age 0 (주의: falsy값)
+  
 }
