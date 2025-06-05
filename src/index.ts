@@ -52,7 +52,7 @@ const updatedSamplePosts: Post[] = [
     id: 103,
     title: "주간 회의 미팅 요약",
     content: "이번 주 회의에서 다룬 주요 안건 및 결정 사항입니다.",
-    authorId: "adminUser.id",
+    authorId: sampleUser.id,
     tags: ["meeting", "summary"],
     status: "published",
     publishedDate: new Date(),
@@ -64,7 +64,6 @@ const updatedSamplePosts: Post[] = [
     authorId: sampleUser.id,
     tags: ["update", "archive"],
     status: "archived",
-    publishedDate: new Date(),
     archivedDate: new Date(),
   },
 ];
