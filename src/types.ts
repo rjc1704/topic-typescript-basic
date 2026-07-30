@@ -6,39 +6,29 @@ export interface User {
   isAdmin: boolean;
 }
 
-export interface DraftPost {
-  status: "draft";
+interface PostBase {
   title: string;
   content: string;
   authorId: number;
   tags: string[];
 }
-export interface PublishedPost {
+
+export interface DraftPost extends PostBase {
+  status: "draft";
+}
+export interface PublishedPost extends PostBase {
   status: "published";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
   publishedDate: Date;
 }
-export interface ArchivedPost {
+export interface ArchivedPost extends PostBase {
   status: "archived";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
   archivedDate: Date;
 }
 export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 
 export type GetPostsFunc = (authorId?: number) => Post[];
 export type GetPostByIdFunc = (id: number) => Post | undefined;
-export type AddPostFunc = (postData: {
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
-}) => Post;
+export type AddPostFunc = (postData: PostBase) => Post;
 export type UpdatePostFunc = (
   id: number,
   updateData: {
