@@ -6,28 +6,23 @@ export interface User {
   isAdmin: boolean;
 }
 
-export interface DraftPost {
+interface PostBase {
+  title: string;
+  content: string;
+  authorId: number;
+  tags: string[];
+}
+
+export interface DraftPost extends PostBase {
   status: "draft";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
 }
-export interface PublishedPost {
+export interface PublishedPost extends PostBase {
   status: "published";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
-  publishedDate: Date;
+  meta: { publishedDate: Date };
 }
-export interface ArchivedPost {
+export interface ArchivedPost extends PostBase {
   status: "archived";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
-  archivedDate: Date;
+  meta: { archivedDate: Date };
 }
 export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 
@@ -35,12 +30,7 @@ export type GetPostsFunc = (authorId?: number) => Post[];
 export type GetPostByIdFunc = (id: number) => Post | undefined;
 
 // TODO-1: 적절한 유틸리티타입을 사용해서 AddPostFunc의 postData 타입을 수정해보세요
-export type AddPostFunc = (postData: {
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
-}) => Post;
+export type AddPostFunc = (postData: PostBase) => Post;
 
 // TODO-2: 적절한 유틸리티타입을 사용해서 UpdatePostFunc의 updateData 타입을 수정해보세요
 export type UpdatePostFunc = (
@@ -50,7 +40,7 @@ export type UpdatePostFunc = (
     content?: string;
     authorId?: number;
     tags?: string[];
-    publishedDate?: Date;
+    meta?: { publishedDate: Date };
   },
 ) => Post | undefined;
 export type DeletePostFunc = (id: number) => boolean;
@@ -85,18 +75,13 @@ export type Optional<T> = {
   [K in keyof T]?: T[K];
 };
 
-export type ExtractStatusData<T, Status extends Post["status"]> = T extends {
-  status: Status;
-  publishedDate?: infer P;
-  archivedDate?: infer A;
+export type StatusMeta<T, S extends Post["status"]> = T extends {
+  status: S;
+  meta: infer M;
 }
-  ? Status extends "published"
-    ? { publishedDate: P }
-    : Status extends "archived"
-    ? { archivedDate: A }
-    : never
+  ? M
   : never;
 
-export type PublishedPostData = ExtractStatusData<Post, "published">; // { publishedDate: Date }
-export type ArchivedPostData = ExtractStatusData<Post, "archived">; // { archivedDate: Date }
-export type DraftPostData = ExtractStatusData<Post, "draft">; // never
+export type PublishedMeta = StatusMeta<Post, "published">; // { publishedDate: Date }              ✅
+export type ArchivedMeta = StatusMeta<Post, "archived">; // { archivedDate: Date; reason: string } ✅
+export type DraftMeta = StatusMeta<Post, "draft">; // never
