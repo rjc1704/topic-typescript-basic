@@ -6,28 +6,23 @@ export interface User {
   isAdmin: boolean;
 }
 
-export interface DraftPost {
+interface PostBase {
+  title: string;
+  content: string;
+  authorId: number;
+  tags: string[];
+}
+
+export interface DraftPost extends PostBase {
   status: "draft";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
 }
-export interface PublishedPost {
+export interface PublishedPost extends PostBase {
   status: "published";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
-  publishedDate: Date;
+  meta: { publishedDate: Date };
 }
-export interface ArchivedPost {
+export interface ArchivedPost extends PostBase {
   status: "archived";
-  title: string;
-  content: string;
-  authorId: number;
-  tags: string[];
-  archivedDate: Date;
+  meta: { archivedDate: Date };
 }
 export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 
@@ -46,7 +41,7 @@ export type UpdatePostFunc = (
     content?: string;
     authorId?: number;
     tags?: string[];
-    publishedDate?: Date;
+    meta?: { publishedDate: Date };
   },
 ) => Post | undefined;
 export type DeletePostFunc = (id: number) => boolean;
@@ -81,12 +76,10 @@ export type Optional<T> = {
   [K in keyof T]?: T[K];
 };
 
-// TODO-1:조건부 타입을 사용하여 Post 타입에서 특정 상태(status)에 해당하는 추가 데이터 타입만 추출하는 제네릭 타입을 완성하세요
-// 예: ExtractStatusData<Post, 'published'>는 { publishedDate: Date } 가 되어야 함
-// (infer 사용해보세요)
+// TODO-1: 조건부타입과 infer 를 사용해 StatusMeta 를 완성하세요
 
-// export type ExtractStatusData<T, Status extends Post["status"]> =
+// export type StatusMeta<T, S extends Post["status"]> = // 여기에 작성
 
-// export type PublishedPostData = ExtractStatusData<Post, "published">; // { publishedDate: Date }
-// export type ArchivedPostData = ExtractStatusData<Post, "archived">; // { archivedDate: Date }
-// export type DraftPostData = ExtractStatusData<Post, "draft">; // never
+// type PublishedMeta = StatusMeta<Post, "published">; // { publishedDate: Date }              ✅
+// type ArchivedMeta = StatusMeta<Post, "archived">; // { archivedDate: Date; reason: string } ✅
+// type DraftMeta = StatusMeta<Post, "draft">; // never                                 ✅

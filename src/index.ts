@@ -26,7 +26,7 @@ const updatedSamplePosts: Post[] = [
     authorId: sampleUser.id,
     tags: ["typescript", "utility-types", "guide"],
     status: "published",
-    publishedDate: new Date(),
+    meta: { publishedDate: new Date() },
   },
   {
     id: 103,
@@ -35,7 +35,7 @@ const updatedSamplePosts: Post[] = [
     authorId: sampleUser.id,
     tags: ["meeting", "summary"],
     status: "published",
-    publishedDate: new Date(),
+    meta: { publishedDate: new Date() },
   },
   {
     id: 104,
@@ -44,7 +44,7 @@ const updatedSamplePosts: Post[] = [
     authorId: sampleUser.id,
     tags: ["update", "archive"],
     status: "archived",
-    archivedDate: new Date(),
+    meta: { archivedDate: new Date() },
   },
 ];
 
