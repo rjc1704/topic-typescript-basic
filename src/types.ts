@@ -22,4 +22,6 @@ export type Post = {
   authorId: number;
   tags: string[];
   status: "draft" | "published" | "archived";
+  publishedDate?: Date; // optional
+  archivedDate?: Date; // optional
 };
