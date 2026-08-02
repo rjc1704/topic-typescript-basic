@@ -29,10 +29,9 @@ export type Post = { id: number } & (DraftPost | PublishedPost | ArchivedPost);
 export type GetPostsFunc = (authorId?: number) => Post[];
 export type GetPostByIdFunc = (id: number) => Post | undefined;
 
-// TODO-1: 적절한 유틸리티타입을 사용해서 AddPostFunc의 postData 타입을 수정해보세요
 export type AddPostFunc = (postData: PostBase) => Post;
 
-// TODO-2: 적절한 유틸리티타입을 사용해서 UpdatePostFunc의 updateData 타입을 수정해보세요
+// TODO-1: 적절한 유틸리티타입을 사용해서 UpdatePostFunc의 updateData 타입을 수정해보세요
 export type UpdatePostFunc = (
   id: number,
   updateData: {

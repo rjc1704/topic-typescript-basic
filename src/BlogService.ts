@@ -18,7 +18,7 @@ export class BlogService implements IBlogService {
     };
   }
 
-  // TODO-3: addPost, updatePost 메서드의 postData 에 적용되어 있는 유틸리티타입을 보고 스스로 납득되는 지 확인해봅시다
+  // TODO-2: addPost, updatePost 메서드의 postData 에 적용되어 있는 유틸리티타입을 보고 스스로 납득되는 지 확인해봅시다
   // 별도의 추가 코딩은 없습니다. 눈으로만 보고 확인해 보세요
   async addPost(
     postData: Omit<DraftPost, "status">,
